@@ -1,0 +1,22 @@
+<div class="carousel-item-image-container">
+  <img
+    [src]="anime().posters.medium"
+    fallback="assets/images/no-poster.png"
+    [alt]="anime().title"
+    class="carousel-item-image"
+    [routerLink]="['/anime', anime().id]"
+  />
+  @if (anime().score) {
+    <div class="carousel-item-rating">
+      <lucide-icon
+        [img]="StarIcon"
+        [size]="15"
+        class="fill-white carousel-item-star-icon"
+      />
+      <span>{{ anime().score }}</span>
+    </div>
+  }
+</div>
+<div class="carousel-item-info">
+  <h3 class="carousel-item-title">{{ anime().title }}</h3>
+</div>

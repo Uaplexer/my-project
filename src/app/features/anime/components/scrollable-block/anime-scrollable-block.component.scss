@@ -1,0 +1,19 @@
+@use "mixins" as *;
+@use "variables" as *;
+
+:host {
+  width: 100%;
+  background-color: var(--background-first);
+  border-radius: $rounded-lg;
+  box-shadow: $shadow-cool;
+}
+
+.viewport {
+  height: 500px;
+  max-width: 411px;
+
+  &-item-container {
+    @include flex-row;
+    padding: 8px;
+  }
+}

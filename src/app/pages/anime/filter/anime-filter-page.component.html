@@ -1,0 +1,30 @@
+<div class="anime-search-filters">
+  <app-filter-block (filtersApplied)="onFiltersChanged($event)" />
+</div>
+
+@if (showPagination()) {
+  <div class="anime-search-pagination">
+    <app-pagination
+      [currentPage]="animeListStore.data()?.page || 1"
+      [lastPage]="animeListStore.data()?.totalPages || 1"
+      (paginationApplied)="onPageChange($event)"
+    />
+  </div>
+}
+
+<div class="anime-search-results">
+  <anime-grid
+    [animeListResponse]="animeListStore.data()"
+    [isLoading]="animeListStore.isLoading()"
+  />
+</div>
+
+@if (showPagination()) {
+  <div class="anime-search-pagination">
+    <app-pagination
+      [currentPage]="animeListStore.data()?.page || 1"
+      [lastPage]="animeListStore.data()?.totalPages || 1"
+      (paginationApplied)="onPageChange($event)"
+    />
+  </div>
+}

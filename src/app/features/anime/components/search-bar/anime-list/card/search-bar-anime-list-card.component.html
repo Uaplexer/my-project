@@ -1,0 +1,14 @@
+<img
+  [src]="anime().posters.medium"
+  [alt]="anime().title"
+  fallback="assets/images/no-poster.png"
+/>
+
+<div class="anime-details">
+  <h3 class="anime-title">{{ anime().title }}</h3>
+  <div class="rating-container">
+    <lucide-icon class="star-icon" [size]="12" [img]="StarIcon" />
+    <span class="score">{{ anime().score | number: "1.1-2" }}</span>
+  </div>
+  <anime-genre-list class="anime-genres" [genres]="anime().genres" />
+</div>

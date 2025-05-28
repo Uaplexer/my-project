@@ -1,0 +1,38 @@
+<div class="episode-list-header">
+  <app-dynamic-input
+    class="episode-list-search"
+    placeholder="Search episodes.."
+    (inputValueChanged)="playerStore.setEpisodeQuery($event)"
+  />
+</div>
+
+<ul class="episodes-container">
+  @if (playerStore.isLoading()) {
+    @for (item of skeletonItems; track $index) {
+      <li class="episode-item skeleton">
+        <div class="episode-number skeleton-pulse"></div>
+        <div class="episode-title">
+          <div class="skeleton-text skeleton-pulse"></div>
+        </div>
+      </li>
+    }
+  } @else {
+    @for (episode of playerStore.filteredEpisodes(); track episode.uuid) {
+      <li
+        class="episode-item"
+        [class.active]="episode == playerStore.currentEpisode()"
+        (click)="playerStore.playEpisode(episode)"
+      >
+        <p class="episode-number">{{ episode.episode }}</p>
+        <h4 class="episode-title">{{ episode.name }}</h4>
+        @if (episode == playerStore.currentEpisode()) {
+          <div class="episode-playing"></div>
+        }
+      </li>
+    } @empty {
+      <div class="no-episodes">
+        <p>No episodes found</p>
+      </div>
+    }
+  }
+</ul>

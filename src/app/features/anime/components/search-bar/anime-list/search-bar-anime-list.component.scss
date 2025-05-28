@@ -1,0 +1,12 @@
+@use "variables" as *;
+
+:host {
+  padding: $spacing-xs 0;
+}
+
+.no-results {
+  padding: $spacing-sm;
+  color: $color-gray-500;
+  text-align: center;
+  font-style: italic;
+}

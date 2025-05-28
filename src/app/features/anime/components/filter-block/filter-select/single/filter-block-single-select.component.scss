@@ -1,0 +1,51 @@
+@use "variables" as *;
+
+:host {
+  flex: 1;
+  min-width: 150px;
+}
+
+.select-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: $font-weight-500;
+  font-size: 0.875rem;
+  color: var(--text-first);
+}
+
+.select-field {
+  width: 100%;
+  font-size: 0.875rem;
+  padding-right: 32px;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+
+  select {
+    width: 100%;
+    padding: 8px;
+    color: var(--text-second);
+    background-color: var(--background-first);
+    border: 1px solid var(--border-first);
+    border-radius: $rounded-md;
+
+    &:hover {
+      border-color: var(--border-second);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary-first);
+      box-shadow: 0 0 0 2px var(--primary-first-transparent-02);
+    }
+  }
+
+  option {
+    padding: 8px;
+
+    &:first-child {
+      color: $color-gray-500;
+      font-style: italic;
+    }
+  }
+}

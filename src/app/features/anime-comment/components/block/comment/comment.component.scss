@@ -1,0 +1,29 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+:host {
+  @include flex-row;
+  padding: 8px;
+  background-color: var(--background-first);
+  gap: 8px;
+  border-bottom: 2px solid var(--primary-first);
+}
+
+.author {
+  &-username {
+    color: var(--text-first);
+    font-size: $font-size-600;
+    font-weight: $font-weight-500;
+  }
+}
+.container {
+}
+
+.comment {
+  &-container {
+  }
+  &-content {
+    color: var(--text-second);
+    font-size: $font-size-450;
+  }
+}

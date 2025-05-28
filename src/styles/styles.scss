@@ -1,0 +1,57 @@
+@use "animations" as *;
+@use "variables" as *;
+@use "tailwindcss";
+@use "themes/themes" as *;
+@use "@angular/material" as mat;
+
+@each $theme-name, $theme-map in $themes {
+  [data-theme="#{'' + $theme-name}"] {
+    @include theme-vars($theme-map);
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #9ca3af #f3f4f6;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 0;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: $rounded-sm;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+button {
+  transition: 0.2s;
+}
+
+select,
+option,
+button {
+  cursor: pointer;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-image: url("/assets/images/anime-girl-on-tree-green-desktop-wallpaper.jpg");
+  background-repeat: repeat;
+}
+
+.fade-out {
+  animation: fadeOut 0.1s ease;
+}
+
+@include mat.dialog-overrides(
+  (
+    container-color: var(--background-first),
+    subhead-color: var(--background-first),
+  )
+);

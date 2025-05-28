@@ -1,0 +1,27 @@
+<button class="theme-configurator-button" (click)="toggleMenu()">
+  <lucide-icon [img]="PaletteIcon"></lucide-icon>
+</button>
+
+@if (isMenuVisible()) {
+  <div class="theme-configurator-menu">
+    <div class="theme-configurator-menu-header">
+      <h3 class="theme-configurator-title">Theme Configurator</h3>
+      <button class="theme-configurator-close-button" (click)="toggleMenu()">
+        <lucide-icon [img]="XIcon"></lucide-icon>
+      </button>
+    </div>
+
+    <div class="theme-configurator-options">
+      @for (theme of themeService.themes; track $index) {
+        <div
+          class="theme-configurator-theme-option"
+          [style.background-color]="theme.color"
+          [class.theme-configurator-theme-option--active]="
+            theme.name === themeService.currentTheme()?.name
+          "
+          (click)="themeService.setTheme(theme)"
+        ></div>
+      }
+    </div>
+  </div>
+}

@@ -1,0 +1,9 @@
+<app-block-header [title]="title()" />
+<cdk-virtual-scroll-viewport itemSize="80" class="viewport">
+  <div
+    class="viewport-item-container"
+    *cdkVirtualFor="let anime of animeList()"
+  >
+    <anime-scrollable-block-item [anime]="anime" />
+  </div>
+</cdk-virtual-scroll-viewport>

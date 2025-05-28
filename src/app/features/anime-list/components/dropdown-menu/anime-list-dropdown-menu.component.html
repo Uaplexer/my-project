@@ -1,0 +1,26 @@
+<button
+  (click)="toggleMenu()"
+  class="anime-list-dropdown-toggle"
+  aria-haspopup="true"
+  [attr.aria-expanded]="isMenuVisible()"
+>
+  <lucide-icon [img]="HeartIcon" [size]="20" class="anime-list-dropdown-icon" />
+</button>
+
+@if (isMenuVisible()) {
+  <div class="anime-list-dropdown-menu">
+    <div class="anime-list-dropdown-menu-inner">
+      @for (
+        listType of ["Watching", "Viewed", "Postponed", "Abandoned"];
+        track $index
+      ) {
+        <button
+          (click)="addToList(listType)"
+          class="anime-list-dropdown-option"
+        >
+          {{ listType }}
+        </button>
+      }
+    </div>
+  </div>
+}

@@ -1,0 +1,14 @@
+@use "variables" as *;
+
+.login-button {
+  margin: 3px;
+  padding: 6px;
+  border-radius: $rounded-md;
+  font-weight: $font-weight-500;
+  background-color: var(--primary-first-transparent-07);
+
+  &:hover {
+    background-color: var(--primary-first-transparent-09);
+    box-shadow: $shadow-sm;
+  }
+}

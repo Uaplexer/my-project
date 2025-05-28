@@ -1,0 +1,12 @@
+@use "mixins" as *;
+@use "variables" as *;
+
+:host {
+  @include flex-col;
+  background-color: var(--background-first);
+}
+
+.not-found {
+  @include flex-center;
+  padding: 8px;
+}

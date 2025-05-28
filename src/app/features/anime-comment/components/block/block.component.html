@@ -1,0 +1,11 @@
+@if (isLoading()) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+} @else {
+  @for (comment of comments(); track $index) {
+    <app-comment [comment]="comment" />
+  } @empty {
+    <div class="not-found">
+      <p>No comments found</p>
+    </div>
+  }
+}

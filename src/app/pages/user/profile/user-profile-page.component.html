@@ -1,0 +1,14 @@
+<user-profile-sidebar
+  class="profile-block"
+  [userAnimeListStatistics]="animeListStatsStore.data()"
+  [currentUser]="currentUser()"
+  [user]="user"
+/>
+<anime-list-list
+  class="anime-list-list-block"
+  [animeListListResponse]="animeListListStore.data()"
+  [animeListType]="animeListListStore.type()"
+  [isLoading]="animeListListStore.isLoading()"
+  (typeChanged)="handleTypeChange($event)"
+  (pageChanged)="handlePageChange($event)"
+/>

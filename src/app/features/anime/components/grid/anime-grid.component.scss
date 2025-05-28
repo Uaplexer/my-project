@@ -1,0 +1,154 @@
+@use "variables" as *;
+@use "mixins" as *;
+@use "animations" as *;
+
+:host {
+  display: block;
+  padding: 16px;
+  box-shadow: $shadow-cool;
+  background-color: var(--background-first);
+  border: 1px solid var(--border-first);
+  border-radius: $rounded-lg;
+  box-shadow: $shadow-cool;
+}
+
+.results {
+  &-header {
+    @include flex-between;
+    align-items: center;
+    color: var(--text-first);
+    margin-bottom: 1.25rem;
+  }
+  &-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  &-count {
+    color: var(--text-second);
+    font-size: 1rem;
+  }
+}
+
+.no-results {
+  color: var(--text-second);
+  font-weight: bold;
+  text-align: center;
+}
+
+.anime-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+
+  @media (min-width: 420px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 668px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+.anime-skeleton-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(1, 1fr);
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.anime-skeleton {
+  background-color: var(--background-first);
+  border-radius: $rounded-lg;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  &-image-container {
+    position: relative;
+    height: 304px;
+  }
+
+  &-image {
+    width: 100%;
+    height: 100%;
+    background-color: $skeleton-light;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  &-favorite {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 20;
+  }
+
+  &-favorite-button {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: $skeleton-light;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation-delay: 0.2s;
+  }
+
+  &-badges {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    padding: 6px;
+  }
+
+  &-badge {
+    height: 20px;
+    border-radius: $rounded-sm;
+    background-color: $skeleton-light;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation-delay: 0.4s;
+
+    &--episodes {
+      width: 32px;
+      margin-right: 6px;
+    }
+
+    &--score {
+      width: 40px;
+    }
+  }
+
+  &-title-container {
+    padding: 10px;
+  }
+
+  &-title {
+    height: 16px;
+    width: 80%;
+    border-radius: $rounded-sm;
+    background-color: $skeleton-light;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation-delay: 0.6s;
+  }
+}

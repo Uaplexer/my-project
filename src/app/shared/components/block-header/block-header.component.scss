@@ -1,0 +1,16 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+:host {
+  @include flex-center;
+  color: var(--text-first);
+  background-color: var(--background-first);
+  border-bottom: 4px solid var(--primary-first);
+  text-align: center;
+  text-transform: uppercase;
+  font-size: $font-size-550;
+  font-weight: $font-weight-500;
+  height: 50px;
+  border-top-right-radius: $rounded-md;
+  border-top-left-radius: $rounded-md;
+}

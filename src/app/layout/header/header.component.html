@@ -1,0 +1,21 @@
+<nav class="app-header">
+  <div class="header-container">
+    <mobile-menu-button class="mobile-menu" />
+    <app-logo />
+    <search-bar class="search-container" />
+    <div class="header-links">
+      <app-social-links />
+      <app-action-links />
+    </div>
+  </div>
+  <app-theme-configurator />
+  @defer (when sessionService.status().isInitialized) {
+    <div class="auth-section">
+      @if (sessionService.status().isAuthenticated && sessionService.user()) {
+        <app-profile-circle [user]="sessionService.user()!" />
+      } @else {
+        <app-header-login-button />
+      }
+    </div>
+  }
+</nav>

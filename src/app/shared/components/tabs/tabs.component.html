@@ -1,0 +1,9 @@
+@for (tab of tabList(); track $index) {
+  <button
+    class="tab"
+    [class.tab--active]="currentTab() === tab"
+    (click)="onTabChange(tab)"
+  >
+    {{ tab }}
+  </button>
+}

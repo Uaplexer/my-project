@@ -1,0 +1,205 @@
+@use "variables" as *;
+@use "animations" as *;
+@use "mixins" as *;
+@use "sass:color";
+
+:host {
+  padding: 24px;
+  background-color: var(--background-first);
+  border-radius: $rounded-lg;
+  box-shadow: $shadow-cool;
+  overflow: hidden;
+  animation: fadeInUp 0.5s ease forwards;
+
+  @media (min-width: 768px) {
+    grid-column: span 2 / span 2;
+  }
+}
+
+.anime-list {
+  &-header {
+    @include flex-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  &-title {
+    color: var(--text-first);
+    font-weight: $font-weight-700;
+    font-size: $font-size-800;
+  }
+
+  &-content {
+    overflow-x: auto;
+  }
+
+  &-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 24px;
+  }
+
+  &-tab {
+    padding: 8px 16px;
+    color: var(--text-first);
+    background-color: var(--background-second);
+    border: 1px solid var(--border-first);
+    font-weight: $font-weight-500;
+    text-align: center;
+
+    &:hover {
+      color: var(--primary-first);
+      background-color: var(--background-third);
+      border: 1px solid var(--border-second);
+    }
+
+    &--active {
+      color: var(--primary-first);
+      background-color: var(--background-third);
+      border: 1px solid var(--border-second);
+    }
+  }
+
+  &-table {
+    min-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  &-table-head {
+    background-color: var(--background-second);
+  }
+
+  &-table-body {
+    background-color: var(--background-first);
+  }
+
+  &-th {
+    padding: 12px 24px;
+    font-weight: $font-weight-500;
+    color: var(--text-second);
+    border: 1px solid var(--border-first);
+    font-size: $font-size-300;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &-row {
+    border-bottom: 1px solid $color-gray-200;
+    transition: background-color 0.15s;
+    color: var(--text-second);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--primary-first);
+      background-color: var(--background-second);
+    }
+  }
+
+  &-cell {
+    padding: 16px 24px;
+    white-space: nowrap;
+  }
+
+  &-title-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .anime-list-poster {
+      width: 40px;
+      height: 56px;
+      border-radius: $rounded-md;
+      object-fit: cover;
+    }
+
+    .anime-list-cell-title {
+      max-width: 208px;
+      font-size: $font-size-500;
+      font-weight: $font-weight-500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &-score-cell {
+    display: flex;
+    align-items: center;
+    font-weight: $font-weight-500;
+    gap: 4px;
+  }
+
+  &-status-cell {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .anime-list-status-icon {
+      &--completed {
+        color: $color-green-500;
+      }
+
+      &--watching {
+        color: $color-blue-500;
+      }
+
+      &--dropped {
+        color: $color-red-500;
+      }
+
+      &--on-hold {
+        color: $color-amber-500;
+      }
+    }
+  }
+}
+
+.paginator {
+  background-color: var(--background-second);
+  color: var(--text-second);
+  border: 1px solid var(--border-first);
+}
+
+.anime-list-skeleton {
+  background-color: $skeleton-light;
+  border-radius: $rounded-md;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  &--poster {
+    width: 40px;
+    height: 56px;
+    border-radius: $rounded-md;
+  }
+
+  &--title {
+    width: 140px;
+    height: 16px;
+  }
+
+  &--icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+
+  &--score {
+    width: 32px;
+    height: 16px;
+  }
+
+  &--status {
+    width: 64px;
+    height: 16px;
+  }
+
+  &--type {
+    width: 48px;
+    height: 16px;
+  }
+
+  &--season {
+    width: 64px;
+    height: 16px;
+  }
+}

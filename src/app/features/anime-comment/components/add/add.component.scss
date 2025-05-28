@@ -1,0 +1,34 @@
+@use "mixins" as *;
+@use "variables" as *;
+
+:host {
+  @include flex-col;
+  align-items: start;
+  background-color: var(--background-first);
+  padding: 8px;
+  gap: 12px;
+}
+
+.comment {
+  &-text {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid var(--primary-first);
+    border-radius: $rounded-md;
+    resize: none;
+  }
+  &-add-btn {
+    width: 100%;
+    padding: 8px;
+    font-size: $font-size-500;
+    font-weight: $font-weight-500;
+    color: $text-light;
+    background-color: var(--primary-first);
+    border-radius: $rounded-md;
+    max-width: 200px;
+
+    &:hover {
+      background-color: var(--primary-second);
+    }
+  }
+}

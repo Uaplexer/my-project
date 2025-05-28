@@ -1,0 +1,23 @@
+<div class="anime-image-wrapper">
+  <img
+    class="anime-image"
+    [src]="anime().posters.small"
+    fallback="assets/images/no-poster.png"
+  />
+  <div class="anime-rating-container">
+    <lucide-icon
+      [img]="starIcon"
+      [size]="11"
+      class="fill-white anime-star-icon"
+    />
+    <span class="anime-rating">{{ anime().score }}</span>
+  </div>
+</div>
+<div class="anime-info">
+  <h2 class="anime-title">{{ anime().title }}</h2>
+  <anime-genre-list
+    size="small"
+    class="anime-genres"
+    [genres]="anime().genres"
+  />
+</div>

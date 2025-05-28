@@ -1,0 +1,19 @@
+<button class="search-button">
+  <lucide-icon name="search" [img]="SearchIcon" size="20" class="search-icon">
+  </lucide-icon>
+</button>
+<app-dynamic-input
+  class="search-input"
+  placeholder="Search anime..."
+  (inputValueChanged)="store.setSearchQuery($event)"
+/>
+<button [routerLink]="['/anime/filter']" class="filter-button">
+  <lucide-icon name="funnel" [img]="FunnelIcon"></lucide-icon>
+</button>
+<div class="results-dropdown">
+  @if (store.isLoading()) {
+    <div class="loading-message">Loading...</div>
+  } @else if (store.searchQuery().length > 3) {
+    <search-bar-anime-list [animeList]="store.animeListSearchResult()" />
+  }
+</div>

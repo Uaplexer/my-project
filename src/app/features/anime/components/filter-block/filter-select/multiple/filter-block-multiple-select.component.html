@@ -1,0 +1,29 @@
+<div
+  (click)="toggleCollapse()"
+  (keydown.enter)="toggleCollapse()"
+  tabindex="0"
+  role="button"
+  class="filter-header"
+>
+  <h3 class="filter-title">
+    {{ filterTitle() }}
+  </h3>
+  <lucide-icon class="chevron-icon" [img]="chevronIcon()" />
+</div>
+@if (isExpanded()) {
+  <div class="filter-values">
+    @for (value of values(); track $index) {
+      <button
+        (click)="toggleValue(value.title)"
+        [class]="
+          selectedValues().has(value.title)
+            ? 'genreItem genreItemSelected'
+            : 'genreItem'
+        "
+        matRipple
+      >
+        {{ value.title }}
+      </button>
+    }
+  </div>
+}

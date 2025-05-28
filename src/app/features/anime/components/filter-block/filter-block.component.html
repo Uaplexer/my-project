@@ -1,0 +1,44 @@
+<h2 class="filter-heading">Filter</h2>
+
+<div class="filter-selects-container">
+  <filter-block-single-select
+    [filterTitle]="'Types'"
+    [options]="availableTypes"
+    (selectionChange)="onSingleSelectChange($event)"
+  />
+  <filter-block-single-select
+    [filterTitle]="'Statuses'"
+    [options]="availableStatuses"
+    (selectionChange)="onSingleSelectChange($event)"
+  />
+  <filter-block-single-select
+    [filterTitle]="'AgeRatings'"
+    [options]="availableAgeRatings"
+    (selectionChange)="onSingleSelectChange($event)"
+  />
+  <filter-block-single-select
+    [filterTitle]="'OrderColumn'"
+    [placeholder]="'-'"
+    [options]="availableSortOptions"
+    (selectionChange)="onSingleSelectChange($event)"
+  />
+  <filter-block-single-select
+    [filterTitle]="'OrderDirection'"
+    [placeholder]="'-'"
+    [options]="availableSortOrders"
+    (selectionChange)="onSingleSelectChange($event)"
+  />
+</div>
+
+<filter-block-multiple-select
+  [filterTitle]="'Genres'"
+  [values]="availableGenres"
+  (selectionChange)="onMultipleSelectChange($event)"
+/>
+<filter-block-multiple-select
+  [filterTitle]="'Themes'"
+  [values]="availableThemes"
+  (selectionChange)="onMultipleSelectChange($event)"
+/>
+
+<button class="filter-button" (click)="emitFilters()">Filter</button>

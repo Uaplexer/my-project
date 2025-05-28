@@ -1,0 +1,100 @@
+@use "variables" as *;
+@use "mixins" as *;
+@use "animations" as *;
+@use "sass:color";
+
+:host {
+  border-radius: $rounded-md;
+  height: fit-content;
+  background-color: var(--background-first);
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.episode-list-header {
+  padding: 16px;
+  border-bottom: 2px solid var(--primary-first);
+}
+
+.episode-list-search {
+  padding: 4px;
+  border-radius: $rounded-sm;
+  color: var(--text-second);
+  border: 2px solid var(--primary-first);
+}
+
+.episodes-container {
+  max-height: 500px;
+  padding: 6px;
+  overflow-y: auto;
+}
+
+.episode-item {
+  @include flex-between;
+  padding: 12px;
+  margin: 6px;
+  border-radius: $rounded-sm;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--primary-first-transparent-02);
+  }
+
+  &.active {
+    background-color: var(--primary-first-transparent-02);
+    border-left: 3px solid var(--primary-first);
+  }
+
+  .episode-number {
+    @include flex-center;
+    color: var(--primary-first);
+    width: 24px;
+    height: 24px;
+    border-radius: $rounded-sm;
+    font-weight: bold;
+    font-size: $font-size-400;
+    margin-right: 12px;
+  }
+
+  .episode-title {
+    flex: 1;
+    color: var(--text-second);
+    font-size: $font-size-400;
+    font-weight: $font-weight-500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .episode-playing {
+    border-radius: 50%;
+    background-color: var(--primary-first);
+    padding: 8px;
+  }
+}
+.no-episodes {
+  padding: 6px;
+  color: var(--text-second);
+}
+
+.episode-item.skeleton {
+  cursor: default;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.skeleton-pulse {
+  background-color: $skeleton-light;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeleton-text {
+  height: 14px;
+  width: 80%;
+  border-radius: $rounded-xs;
+}

@@ -1,0 +1,22 @@
+<img
+  [src]="
+    user().avatars === 'Default'
+      ? 'assets/images/default-avatar.jpg'
+      : user().avatars
+  "
+  alt="User Avatar"
+  class="user-avatar-image"
+/>
+@if (isCurrentUserProfileOwner()) {
+  <button class="user-avatar-edit-button" (click)="onEditAvatar()">
+    <lucide-icon [img]="PencilIcon" class="user-avatar-edit-icon" />
+  </button>
+}
+
+<input
+  type="file"
+  #fileInput
+  accept="image/*"
+  class="user-avatar-file-input"
+  (change)="onFileSelected($event)"
+/>

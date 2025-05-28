@@ -1,0 +1,152 @@
+<div class="anime-list-header">
+  <h2 class="anime-list-title">Anime List</h2>
+</div>
+
+<div class="anime-list-content">
+  <div class="anime-list-tabs">
+    @for (
+      tab of ["Watching", "Viewed", "Postponed", "Abandoned"];
+      track $index
+    ) {
+      <button
+        class="anime-list-tab"
+        [class.anime-list-tab--active]="animeListType() === tab"
+        (click)="onTypeChange(tab)"
+      >
+        {{
+          tab === "Watching"
+            ? "Watching"
+            : tab === "Viewed"
+              ? "Completed"
+              : tab === "Postponed"
+                ? "On Hold"
+                : "Dropped"
+        }}
+      </button>
+    }
+  </div>
+
+  @if (isLoading()) {
+    <table class="anime-list-table">
+      <thead class="anime-list-table-head">
+        <tr>
+          <th class="anime-list-th anime-list-th--title">Title</th>
+          <th class="anime-list-th">Score</th>
+          <th class="anime-list-th">Status</th>
+          <th class="anime-list-th">Type</th>
+          <th class="anime-list-th">Season</th>
+        </tr>
+      </thead>
+      <tbody class="anime-list-table-body">
+        @for (item of [1, 2, 3, 4, 5, 6]; track $index) {
+          <tr class="anime-list-row">
+            <td class="anime-list-cell">
+              <div class="anime-list-title-cell">
+                <div
+                  class="anime-list-skeleton anime-list-skeleton--poster"
+                ></div>
+                <div
+                  class="anime-list-skeleton anime-list-skeleton--title"
+                ></div>
+              </div>
+            </td>
+            <td class="anime-list-cell">
+              <div class="anime-list-score-cell">
+                <div
+                  class="anime-list-skeleton anime-list-skeleton--icon"
+                ></div>
+                <div
+                  class="anime-list-skeleton anime-list-skeleton--score"
+                ></div>
+              </div>
+            </td>
+            <td class="anime-list-cell">
+              <div class="anime-list-status-cell">
+                <div
+                  class="anime-list-skeleton anime-list-skeleton--icon"
+                ></div>
+                <div
+                  class="anime-list-skeleton anime-list-skeleton--status"
+                ></div>
+              </div>
+            </td>
+            <td class="anime-list-cell">
+              <div class="anime-list-skeleton anime-list-skeleton--type"></div>
+            </td>
+            <td class="anime-list-cell">
+              <div
+                class="anime-list-skeleton anime-list-skeleton--season"
+              ></div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @else {
+    <table class="anime-list-table">
+      <thead class="anime-list-table-head">
+        <tr>
+          <th class="anime-list-th anime-list-th--title">Title</th>
+          <th class="anime-list-th">Score</th>
+          <th class="anime-list-th">Status</th>
+          <th class="anime-list-th">Type</th>
+          <th class="anime-list-th">Season</th>
+        </tr>
+      </thead>
+      <tbody class="anime-list-table-body">
+        @for (animeList of animeListListResponse()?.items; track animeList.id) {
+          <tr
+            class="anime-list-row"
+            [routerLink]="['/anime', animeList.anime.id]"
+          >
+            <td class="anime-list-cell">
+              <div class="anime-list-title-cell">
+                <img
+                  [src]="animeList.anime.posters.small"
+                  [alt]="animeList.anime.title"
+                  fallback="assets/images/no-poster.png"
+                  class="anime-list-poster"
+                />
+                <h4 class="anime-list-cell-title">
+                  {{ animeList.anime.title }}
+                </h4>
+              </div>
+            </td>
+            <td class="anime-list-cell">
+              <div class="anime-list-score-cell">
+                <lucide-icon size="20" [img]="StarIcon" />
+                {{ animeList.anime.score }}
+              </div>
+            </td>
+            <td class="anime-list-cell">
+              <div class="anime-list-status-cell">
+                <lucide-icon
+                  [img]="getStatusIcon(animeList.type)"
+                  class="anime-list-status-icon"
+                  size="20"
+                  [ngClass]="getStatusClass(animeList.type)"
+                />
+                <span>{{ getStatusText(animeList.type) }}</span>
+              </div>
+            </td>
+            <td class="anime-list-cell">
+              {{ animeList.anime.type }}
+            </td>
+            <td class="anime-list-cell">
+              {{ animeList.anime.season }}
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
+<mat-paginator
+  class="paginator"
+  [length]="animeListListResponse()?.totalCount"
+  [pageSize]="animeListListResponse()?.pageSize"
+  [pageSizeOptions]="[6]"
+  (page)="onPageChange($event)"
+  aria-label="Select page"
+>
+</mat-paginator>

@@ -1,0 +1,48 @@
+@use "variables" as *;
+@use "animations" as *;
+@use "mixins" as *;
+
+:host {
+  display: block;
+  padding: 16px;
+  background-color: var(--background-first);
+  border: 1px solid var(--border-first);
+  box-shadow: $shadow-cool;
+  border-radius: $rounded-lg;
+  animation: fadeInUp 0.5s ease;
+}
+
+.filter-heading {
+  margin-bottom: $spacing-md;
+  font-weight: $font-weight-700;
+  font-size: 1.5rem;
+  color: var(--text-first);
+}
+
+.filter-date-selects-container {
+  @include flex-wrap;
+  gap: 10px;
+  margin-bottom: $spacing-md;
+}
+
+.filter-selects-container {
+  @include flex-wrap;
+  gap: 10px;
+  margin-bottom: $spacing-md;
+}
+
+.filter-button {
+  background-color: var(--primary-first);
+  padding: $spacing-xs $spacing-md;
+  border-radius: $rounded-md;
+  font-weight: $font-weight-700;
+  color: var(--text-first);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    background-color: var(--primary-second);
+    box-shadow: $shadow-sm;
+  }
+}

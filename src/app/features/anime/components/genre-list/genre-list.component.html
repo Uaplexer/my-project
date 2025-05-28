@@ -1,0 +1,18 @@
+@if (genresLength() > maxSize() && !isToggled()) {
+  @for (genre of visibleGenres(); track $index) {
+    <span class="genre-tag">
+      {{ genre }}
+    </span>
+  }
+  <span (click)="toggleGenres()" class="genre-tag">
+    +{{ genresLength() - maxSize() }}
+  </span>
+} @else {
+  @for (genre of genres(); track $index) {
+    <span class="genre-tag">
+      {{ genre }}
+    </span>
+  } @empty {
+    <p class="no-genres">No genres</p>
+  }
+}

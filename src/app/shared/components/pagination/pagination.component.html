@@ -1,0 +1,16 @@
+@if (showFirstPageLink()) {
+  <pagination-item value="<<" (click)="setPage(1)" />
+}
+@for (page of visiblePages(); track page) {
+  <pagination-item
+    [value]="page"
+    [isActive]="currentPage() === page"
+    (click)="setPage(page)"
+  />
+}
+@if (showLastPageLink()) {
+  <pagination-item
+    value=">>"
+    (click)="setPage(lastPage())"
+  />
+}

@@ -1,0 +1,51 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+:host {
+  @include flex-wrap;
+  gap: 8px;
+
+  --genre-tag-font-size: #{$font-size-sm};
+  --genre-tag-padding: 2px 6px;
+
+  &[size="small"] {
+    --genre-tag-font-size: #{$font-size-xs};
+    --genre-tag-padding: 1px 4px;
+  }
+
+  &[size="medium"] {
+    --genre-tag-font-size: #{$font-size-sm};
+    --genre-tag-padding: 2px 6px;
+  }
+
+  &[size="large"] {
+    --genre-tag-font-size: #{$font-size-base};
+    --genre-tag-padding: 4px 8px;
+  }
+
+  @media (max-width: 1080px) {
+    gap: 4px;
+  }
+}
+
+.genre-tag {
+  background-color: var(--background-third);
+  color: var(--text-second);
+  padding: var(--genre-tag-padding);
+  font-size: var(--genre-tag-font-size);
+  border-radius: $rounded-2xl;
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
+
+  &:hover {
+    cursor: pointer;
+    color: var(--text-first);
+    background-color: var(--primary-first);
+    transform: translateY(-1px);
+  }
+}
+
+.no-genres {
+  font-size: var(--genre-tag-font-size);
+}

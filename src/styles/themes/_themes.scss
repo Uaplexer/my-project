@@ -1,0 +1,149 @@
+$theme-types: (
+  light: (
+    background-first: #ffffff,
+    background-second: #f8fafc,
+    background-third: #f1f5f9,
+  ),
+  dark: (
+    background-first: #020617,
+    background-second: #0c1020,
+    background-third: #334155,
+  ),
+);
+
+$surfaces: (
+  slate: (
+    background-first: #020617,
+    background-second: #0c1020,
+    background-third: #334155,
+    border-first: #334155,
+    border-second: #64748b,
+    text-first: #ffffff,
+    text-second: #9ca3af,
+  ),
+  gray: (
+    background-first: #030712,
+    background-second: #111827,
+    background-third: #1f2937,
+    border-first: #374151,
+    border-second: #6b7280,
+    text-first: #ffffff,
+    text-second: #9ca3af,
+  ),
+  zinc: (
+    background-first: #09090b,
+    background-second: #18181b,
+    background-third: #27272a,
+    border-first: #3f3f46,
+    border-second: #71717a,
+    text-first: #ffffff,
+    text-second: #a1a1aa,
+  ),
+  neutral: (
+    background-first: #0a0a0a,
+    background-second: #171717,
+    background-third: #262626,
+    border-first: #404040,
+    border-second: #737373,
+    text-first: #ffffff,
+    text-second: #a3a3a3,
+  ),
+);
+
+$primaries: (
+  blue: (
+    primary-first: #38bdf8,
+    primary-second: #0ea5e9,
+    primary-third: #7dd3fc,
+    primary-fourth: #bae6fd,
+  ),
+  indigo: (
+    primary-first: #818cf8,
+    primary-second: #4f46e5,
+    primary-third: #a5b4fc,
+    primary-fourth: #c7d2fe,
+  ),
+  yellow: (
+    primary-first: #facc15,
+    primary-second: #fbbf24,
+    primary-third: #fde047,
+    primary-fourth: #fef08a,
+  ),
+  green: (
+    primary-first: #4ade80,
+    primary-second: #22c55e,
+    primary-third: #86efac,
+    primary-fourth: #bbf7d0,
+  ),
+);
+
+$themes: (
+  light: (
+    background-first: #ffffff,
+    background-second: #f8fafc,
+    background-third: #f1f5f9,
+    border-first: #e2e8f0,
+    border-second: #94a3b8,
+    text-first: #000000,
+    text-second: #505d74,
+    primary-first: #4169e1,
+    primary-second: #155dfc,
+  ),
+  dark: (
+    background-first: #020617,
+    background-second: #0c1020,
+    background-third: #334155,
+    border-first: #334155,
+    border-second: #64748b,
+    text-first: #ffffff,
+    text-second: #9ca3af,
+    primary-first: #facc15,
+    primary-second: #fbbf24,
+  ),
+  solarized: (
+    background-first: #fdf6e3,
+    background-second: #eee8d5,
+    background-third: #ebe0be,
+    border-first: #e2e8f0,
+    border-second: #94a3b8,
+    text-first: #657b83,
+    text-second: #839496,
+    primary-first: #b58900,
+    primary-second: #806d03,
+  ),
+  pink: (
+    background-first: #ffe4e6,
+    background-second: #f9f5f7,
+    background-third: #f8dae9,
+    border-first: #e2e8f0,
+    border-second: #94a3b8,
+    text-first: #b448b1,
+    text-second: #c196d3,
+    primary-first: #ff66c4,
+    primary-second: #ff33a1,
+  ),
+);
+
+@mixin theme-vars($map) {
+  @each $key, $val in $map {
+    @if $key == "background-first" or $key == "primary-first" {
+      @for $i from 1 through 9 {
+        $opacity: calc($i / 10);
+        --#{$key}-transparent-0#{$i}: #{rgba($val, $opacity)};
+      }
+    }
+    --#{$key}: #{$val};
+  }
+}
+// @each $theme-type, $theme-type-values in $theme-types {
+//   @each $theme-surface, $surface-values in $surfaces {
+//     @each $primary-color, $primary-values in $primaries {
+//       $theme-name: '#{$theme-type}-#{$theme-surface}-#{$primary-color}';
+//       $theme-map: map-merge($theme-type-values, $surface-values, $primary-values);
+
+//       [data-theme="#{'' + $theme-name}"] {
+//         @include theme-vars($theme-map);
+//       }
+//     }
+//   }
+// }

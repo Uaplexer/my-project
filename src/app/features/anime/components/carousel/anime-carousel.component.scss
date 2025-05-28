@@ -1,0 +1,53 @@
+@use "variables" as *;
+@use "animations" as *;
+@use "mixins" as *;
+
+:host {
+  display: block;
+  background-color: var(--background-first);
+  border: 1px solid var(--border-first);
+  box-shadow: $shadow-cool;
+  border-radius: $rounded-lg;
+  animation: fadeInUp 0.5s ease;
+}
+
+.anime-carousel {
+  &-slider {
+    padding: 16px;
+  }
+}
+
+.anime-carousel-skeleton {
+  @include flex-col;
+  padding: 5px;
+  height: 350px;
+
+  &-image {
+    position: relative;
+    height: 300px;
+    border-radius: $rounded-lg;
+    background-color: $skeleton-light;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  &-rating {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 45px;
+    height: 24px;
+    border-radius: $rounded-xl;
+    background-color: $skeleton-light;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation-delay: 0.3s;
+  }
+
+  &-title {
+    height: 20px;
+    margin-top: 10px;
+    border-radius: $rounded-sm;
+    background-color: $skeleton-light;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation-delay: 0.5s;
+  }
+}

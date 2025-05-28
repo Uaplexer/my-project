@@ -1,0 +1,75 @@
+@use "variables" as *;
+@use "mixins" as *;
+@use "sass:color";
+
+:host {
+  @include flex-row;
+  cursor: pointer;
+  padding: $spacing-xs;
+  border-bottom: 1px dashed $color-gray-300;
+  transition:
+    background-color 0.2s,
+    transform 0.3s;
+
+  &:hover {
+    background-color: var(--background-second);
+    transform: translateX(2px);
+    box-shadow: $shadow-sm;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+img {
+  flex-shrink: 0;
+  position: relative;
+  margin-right: $spacing-xs;
+  border-radius: $rounded-md;
+  width: 64px;
+  height: 80px;
+  object-fit: cover;
+  transition: transform 0.3s;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.anime-details {
+  @include flex-col;
+  flex-shrink: 1;
+  color: var(--text-first);
+
+  .anime-title {
+    font-weight: $font-weight-500;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 190px;
+  }
+
+  .rating-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+
+    .star-icon {
+      fill: currentColor;
+      width: 12px;
+      height: 12px;
+      color: #ffb800;
+    }
+
+    .score {
+      color: var(--text-second);
+      font-size: 0.75rem;
+    }
+  }
+
+  .anime-genres {
+    margin-top: $spacing-xs;
+  }
+}

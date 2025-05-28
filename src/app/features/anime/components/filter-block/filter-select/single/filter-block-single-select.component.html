@@ -1,0 +1,17 @@
+<label class="select-label" [for]="filterTitleId">
+  {{ filterTitle() }}
+</label>
+<div class="select-field">
+  <select
+    [id]="filterTitleId"
+    [(ngModel)]="selectedValue"
+    (ngModelChange)="onSelectionChange($event)"
+  >
+    <option value="" selected>{{ placeholder() }}</option>
+    @for (option of options(); track $index) {
+      <option [value]="option.title">
+        {{ option.title }}
+      </option>
+    }
+  </select>
+</div>

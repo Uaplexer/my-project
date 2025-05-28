@@ -1,0 +1,11 @@
+<!-- Episode List -->
+<anime-episode-list />
+
+<!-- Video Player -->
+<app-video-player
+  [anime]="store.anime()!"
+  [currentEpisode]="store.currentEpisode()"
+/>
+
+<!-- Anime Info Panel -->
+<anime-info-panel [anime]="store.anime()!" />

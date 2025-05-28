@@ -1,0 +1,52 @@
+@use "variables" as *;
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  background-color: var(--background-first-transparent-08);
+  transition: box-shadow 0.3s ease;
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    gap: 14px;
+    padding: $spacing-xs;
+    height: 64px;
+  }
+
+  .mobile-menu {
+    display: none;
+    margin: $spacing-xs 0;
+
+    @media (min-width: 640px) {
+      display: block;
+    }
+  }
+
+  .search-container {
+    max-width: 384px;
+    flex-grow: 1;
+  }
+
+  .header-links {
+    display: none;
+    gap: $spacing-xs;
+    margin: $spacing-xs 0;
+    align-items: center;
+
+    @media (min-width: 1024px) {
+      display: flex;
+    }
+  }
+
+  .auth-section {
+    margin-right: 8px;
+    transition: transform 0.2s ease;
+  }
+}

@@ -1,0 +1,67 @@
+@use "variables" as *;
+@use "animations" as *;
+@use "mixins" as *;
+@use "sass:color";
+
+:host {
+  display: block;
+  margin-bottom: $spacing-sm;
+}
+
+.filter-header {
+  @include flex-row;
+  outline: none;
+  width: 40px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .filter-title {
+    color: var(--text-first);
+    font-weight: $font-weight-500;
+    font-size: 1.125rem;
+  }
+
+  .chevron-icon {
+    color: var(--text-first);
+    margin-top: 4px;
+    height: 14px;
+    transition: transform 0.2s ease;
+  }
+}
+
+.filter-values {
+  @include flex-wrap;
+  margin-top: 8px;
+  gap: 10px;
+  animation: fadeInUp 0.2s ease-in-out;
+}
+
+.genreItem {
+  color: var(--text-second);
+  font-weight: $font-weight-500;
+  border-radius: $rounded-3xl;
+  border: 1px solid var(--border-first);
+  background-color: var(--background-second);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    color: var(--text-first);
+    border-color: var(--border-second);
+    transform: translateY(-1px);
+  }
+}
+
+.genreItemSelected {
+  color: var(--text-first);
+  border-color: var(--border-first);
+  background-color: var(--primary-first);
+
+  &:hover {
+    filter: brightness(0.95);
+  }
+}

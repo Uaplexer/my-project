@@ -1,0 +1,20 @@
+<div class="anime-item">
+  <img
+    [routerLink]="['/anime', anime().id]"
+    [src]="anime().posters.medium"
+    [alt]="anime().title"
+    fallback="assets/images/no-poster.png"
+    class="anime-grid-item-img"
+  />
+  <div class="dropdown-menu-container">
+    <anime-list-dropdown-menu [animeId]="anime().id" />
+  </div>
+
+  <div class="anime-info-container">
+    <span class="anime-info-badge anime-info-badge-first">{{ 0 }}</span>
+    <span class="anime-info-badge">{{ anime().score }}</span>
+  </div>
+</div>
+<h4 [routerLink]="['/anime', anime().id]" class="anime-title">
+  {{ anime().title }}
+</h4>

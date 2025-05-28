@@ -1,0 +1,44 @@
+<div class="results-header">
+  <h2 class="results-title">Results</h2>
+  @if (!isLoading() && animeListResponse()?.totalCount) {
+    <span class="results-count">
+      {{ animeListResponse()?.totalCount }}
+      {{ animeListResponse()?.totalCount === 1 ? "result" : "results" }}
+    </span>
+  }
+</div>
+
+@if (isLoading()) {
+  <div class="anime-skeleton-grid">
+    @for (item of skeletonItems; track $index) {
+      <div class="anime-skeleton">
+        <div class="anime-skeleton-image-container">
+          <div class="anime-skeleton-image"></div>
+
+          <div class="anime-skeleton-favorite">
+            <div class="anime-skeleton-favorite-button"></div>
+          </div>
+
+          <div class="anime-skeleton-badges">
+            <div
+              class="anime-skeleton-badge anime-skeleton-badge--episodes"
+            ></div>
+            <div class="anime-skeleton-badge anime-skeleton-badge--score"></div>
+          </div>
+        </div>
+
+        <div class="anime-skeleton-title-container">
+          <div class="anime-skeleton-title"></div>
+        </div>
+      </div>
+    }
+  </div>
+} @else if (animeListResponse()?.totalCount === 0) {
+  <h2 class="no-results">No results found</h2>
+} @else {
+  <div class="anime-grid">
+    @for (anime of animeListResponse()?.items; track anime.id) {
+      <anime-grid-item [anime]="anime" />
+    }
+  </div>
+}

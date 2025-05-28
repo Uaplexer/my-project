@@ -1,0 +1,14 @@
+@for (link of socialLinks; track $index) {
+<a [href]="link.link" class="social-link">
+    <div class="icon-container">
+    <img
+        [src]="link.icon"
+        [alt]="link.alt"
+        width="24"
+        height="24"
+        class="icon-image"
+    />
+    </div>
+</a>
+}
+

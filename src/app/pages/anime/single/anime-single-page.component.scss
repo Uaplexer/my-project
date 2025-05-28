@@ -1,0 +1,179 @@
+@use "animations" as *;
+@use "mixins" as *;
+@use "variables" as *;
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @include respond-to(md) {
+    padding: 0 2rem;
+  }
+}
+
+.anime-hero {
+  position: relative;
+  height: 60vh;
+  min-height: 400px;
+  color: $text-light;
+  overflow: hidden;
+
+  @include respond-to(md) {
+    height: 70vh;
+  }
+
+  &-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba($background-dark, 0.5) 0%,
+        rgba($background-dark, 0.9) 100%
+      );
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: blur(8px);
+      transform: scale(1.05);
+      transition: transform 0.3s ease;
+    }
+  }
+
+  &-content {
+    @include flex-col;
+    position: relative;
+    height: 100%;
+    padding-left: 64px;
+    z-index: 2;
+
+    @include respond-to(md) {
+      flex-direction: row;
+      align-items: center;
+      gap: 2.5rem;
+    }
+  }
+
+  &-poster {
+    width: 180px;
+    margin-bottom: 1.5rem;
+    border-radius: $rounded-2xl;
+    overflow: hidden;
+    box-shadow: $shadow-cool;
+
+    @include respond-to(md) {
+      width: 240px;
+      margin-bottom: 0;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+
+  &-info {
+    flex: 1;
+  }
+
+  &-title {
+    font-size: 1.75rem;
+    font-weight: $font-weight-700;
+    margin-bottom: 1rem;
+
+    @include respond-to(md) {
+      font-size: 2.5rem;
+    }
+  }
+
+  &-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  &-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    lucide-icon {
+      color: #fbbf24;
+    }
+  }
+
+  &-separator {
+    width: 4px;
+    height: 4px;
+    background-color: $text-light;
+    border-radius: 50%;
+    margin: 0 0.75rem;
+  }
+
+  &-genres {
+    margin-bottom: $spacing-md;
+  }
+
+  &-date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &-actions {
+    @include flex-wrap;
+    gap: 1rem;
+  }
+
+  &-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: $rounded-lg;
+    font-weight: $font-weight-600;
+    background-color: var(--background-first-transparent-01);
+    backdrop-filter: blur(4px);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: var(--background-first-transparent-02);
+    }
+
+    &--primary {
+      background-color: var(--primary-first);
+
+      &:hover {
+        background-color: var(--primary-second);
+      }
+    }
+  }
+}
+
+.anime-content {
+  margin-top: -2rem;
+  position: relative;
+  z-index: 3;
+}
+
+.anime-description {
+  background-color: var(--background-first);
+  color: var(--text-first);
+  padding: 8px;
+}
+
+.anime-hero,
+.anime-content {
+  animation: fadeInUp 0.5s ease forwards;
+}

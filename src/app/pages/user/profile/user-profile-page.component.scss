@@ -1,0 +1,32 @@
+@use "mixins" as *;
+@use "variables" as *;
+
+:host {
+  display: flex;
+  gap: $spacing-sm;
+  margin: 32px auto;
+  padding: 0 8px;
+  max-width: 1440px;
+
+  @media (max-width: 920px) {
+    flex-direction: column;
+  }
+}
+
+.profile-block {
+  min-width: 390px;
+  align-self: start;
+
+  @media (max-width: 920px) {
+    align-self: stretch;
+  }
+}
+
+.anime-list-list-block {
+  flex-grow: 1;
+  align-self: start;
+
+  @media (max-width: 920px) {
+    align-self: stretch;
+  }
+}

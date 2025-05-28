@@ -1,0 +1,188 @@
+<!-- Login / Register Modal -->
+@if (!showRegister()) {
+  <button (click)="onClose()" class="close-button" aria-label="Close">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"
+      />
+    </svg>
+  </button>
+
+  <div class="modal-header">
+    <h2 class="modal-title">Welcome back!</h2>
+  </div>
+
+  <div class="modal-body">
+    <form (ngSubmit)="onLogin()" [formGroup]="loginForm">
+      <div class="form-control">
+        <label for="username" class="label">USERNAME</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          class="input"
+          placeholder="Username"
+          formControlName="username"
+        />
+      </div>
+
+      <div class="form-control">
+        <label for="password" class="label">PASSWORD</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="input"
+          placeholder="Password"
+          formControlName="password"
+        />
+      </div>
+
+      <div class="form-options">
+        <div class="checkbox-container">
+          <input
+            type="checkbox"
+            id="remember"
+            name="remember"
+            class="checkbox"
+          />
+          <label for="remember" class="checkbox-label">Remember me</label>
+        </div>
+        <a href="#" class="link-warning">Forgot password?</a>
+      </div>
+      @if (isLoading()) {
+        <mat-spinner
+          class="loading-spinner",
+          mode="indeterminate"
+          diameter="30"
+          strokeWidth="3"/>
+      }
+      @if (isLoginFailed()) {
+        <p class="error-text">Invalid credentials</p>
+      }
+
+      <button type="submit" class="btn btn-warning">Login</button>
+    </form>
+
+    <div class="form-footer">
+      Don't have an account?
+      <button type="button" (click)="onShowRegister()" class="link-button">
+        Register
+      </button>
+    </div>
+  </div>
+} @else {
+  <button (click)="onClose()" class="close-button" aria-label="Close">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"
+      />
+    </svg>
+  </button>
+
+  <div class="modal-header">
+    <h2 class="modal-title">Create an account</h2>
+  </div>
+
+  <div class="modal-body">
+    <form (ngSubmit)="onRegister()" [formGroup]="registerForm">
+      <div class="form-control">
+        <label for="name" class="label">USERNAME</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="input"
+          placeholder="John Doe"
+          formControlName="username"
+        />
+      </div>
+
+      <div class="form-control">
+        <label for="email" class="label">EMAIL ADDRESS</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="input"
+          placeholder="name@email.com"
+          formControlName="email"
+        />
+      </div>
+
+      <div class="control-row" formGroupName="passwords">
+        <div class="form-control">
+          <label for="password" class="label">PASSWORD</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="input"
+            placeholder="Password"
+            formControlName="password"
+          />
+        </div>
+
+        <div class="form-control">
+          <label for="confirmPassword" class="label">CONFIRM PASSWORD</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            class="input"
+            placeholder="Confirm Password"
+            formControlName="confirmPassword"
+          />
+        </div>
+      </div>
+
+      <div class="form-options">
+        <div class="checkbox-container">
+          <input
+            type="checkbox"
+            id="remember"
+            name="remember"
+            class="checkbox"
+          />
+          <label for="remember" class="checkbox-label">Remember me</label>
+        </div>
+      </div>
+      @if (isLoading()) {
+        <mat-spinner
+          class="loading-spinner",
+          mode="indeterminate"
+          diameter="30"
+          strokeWidth="3"/>
+      }
+      @if (isRegisterFailed()) {
+        <p class="error-text">Invalid form</p>
+      }
+      <button type="submit" class="btn btn-warning">Register</button>
+    </form>
+
+    <div class="form-footer">
+      Already have an account?
+      <button type="button" (click)="onShowLogin()" class="link-button">
+        Login
+      </button>
+    </div>
+  </div>
+}

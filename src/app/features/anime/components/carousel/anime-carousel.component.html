@@ -1,0 +1,21 @@
+@if (isLoading()) {
+  <app-block-header title="..." />
+  <ngx-slick-carousel class="anime-carousel-slider" [config]="slideConfig">
+    @for (item of skeletonItems; track $index) {
+      <div ngxSlickItem>
+        <div class="anime-carousel-skeleton">
+          <div class="anime-carousel-skeleton-image"></div>
+          <div class="anime-carousel-skeleton-rating"></div>
+          <div class="anime-carousel-skeleton-title"></div>
+        </div>
+      </div>
+    }
+  </ngx-slick-carousel>
+} @else {
+  <app-block-header [title]="title()" />
+  <ngx-slick-carousel class="anime-carousel-slider" [config]="slideConfig">
+    @for (anime of animeList(); track anime.id) {
+      <anime-carousel-item ngxSlickItem [anime]="anime"> </anime-carousel-item>
+    }
+  </ngx-slick-carousel>
+}

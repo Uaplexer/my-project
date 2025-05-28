@@ -1,0 +1,11 @@
+@if (animeList().length > 0) {
+    @for (anime of animeList(); track $index) {
+      <search-bar-anime-list-card
+        [routerLink]="['/anime', anime.id]"
+        [anime]="anime"
+      />
+    }
+
+} @else {
+  <div class="no-results">No results found</div>
+}

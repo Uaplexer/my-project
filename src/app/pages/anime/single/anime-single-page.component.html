@@ -1,0 +1,78 @@
+<div class="anime-hero">
+  <div class="anime-hero-backdrop">
+    <img
+      [alt]="anime().title"
+      [src]="anime().posters.medium"
+      fallback="assets/images/no-poster.png"
+    />
+  </div>
+
+  <div class="anime-hero-content">
+    <div class="anime-hero-poster">
+      <img
+        [alt]="anime().title"
+        [src]="anime().posters.medium"
+        fallback="assets/images/no-poster.png"
+      />
+    </div>
+
+    <div class="anime-hero-info">
+      <h1 class="anime-hero-title">
+        {{ anime().title || "Unknown Title" }}
+      </h1>
+
+      <div class="anime-hero-meta">
+        <div class="anime-hero-rating">
+          <lucide-icon [img]="StarIcon"></lucide-icon>
+          <span>{{ anime().score || "?" }}</span>
+        </div>
+
+        <div class="anime-hero-separator"></div>
+
+        <div class="anime-hero-date">
+          <lucide-icon [img]="CalendarIcon"></lucide-icon>
+          <span>{{ anime().airedFrom | date }}</span>
+        </div>
+      </div>
+
+      <anime-genre-list
+        class="anime-hero-genres"
+        size="large"
+        [genres]="anime().genres"
+      />
+
+      <div class="anime-hero-actions">
+        <button
+          [routerLink]="['/anime', anime().id, 'watch']"
+          class="anime-hero-action-btn anime-hero-action-btn--primary"
+        >
+          <lucide-icon [img]="PlayIcon"></lucide-icon>
+          <span>Watch Now</span>
+        </button>
+        <button class="anime-hero-action-btn">
+          <anime-list-dropdown-menu [animeId]="anime().id" />
+          <span>Add to List</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="anime-info">
+  <app-tabs
+    [tabList]="['Synopsis', 'Comments', 'Stats', 'Other']"
+    [currentTab]="currentTab()"
+    (tabChanged)="onTabChange($event)"
+  />
+
+  @if (currentTab() === "Synopsis") {
+    <div class="anime-description">
+      <p>{{ anime().description }}</p>
+    </div>
+  } @else if (currentTab() === "Comments") {
+    <app-add-comment />
+    <app-comment-block
+      [isLoading]="store.isLoading()"
+      [comments]="store.comments()"
+    />
+  }
+</div>
