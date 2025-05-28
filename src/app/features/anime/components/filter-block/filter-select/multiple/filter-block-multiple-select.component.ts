@@ -4,9 +4,8 @@ import {
   ChevronUpIcon,
   LucideAngularModule,
 } from 'lucide-angular';
-import { TitledEntity } from '@shared/models/common.model';
 import { MatRippleModule } from '@angular/material/core';
-import { toCamelCase } from '@shared/utils/format.utils';
+import { AnimeFilterMultipleSelect } from '@features/anime/models/anime.model';
 
 @Component({
   selector: 'filter-block-multiple-select',
@@ -15,8 +14,7 @@ import { toCamelCase } from '@shared/utils/format.utils';
   styleUrl: './filter-block-multiple-select.component.scss',
 })
 export class FilterBlockMultipleSelectComponent {
-  filterTitle = input.required<string>();
-  values = input.required<TitledEntity[]>();
+  filterData = input.required<AnimeFilterMultipleSelect>();
   selectionChange = output<{ name: string; value: string }>();
 
   isCollapsed = signal(true);
@@ -39,8 +37,8 @@ export class FilterBlockMultipleSelectComponent {
     });
 
     this.selectionChange.emit({
-      name: this.filterTitle(),
-      value: toCamelCase(value),
+      name: this.filterData().title,
+      value: value,
     });
   }
 }

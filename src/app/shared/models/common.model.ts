@@ -7,6 +7,6 @@ export interface Auditable<T> extends Identity<T> {
   updatedAt: Date;
 }
 
-export interface TitledEntity {
+export interface TitledEntity extends Identity<number> {
   title: string;
 }

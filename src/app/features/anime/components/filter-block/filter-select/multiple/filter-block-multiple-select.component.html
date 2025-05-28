@@ -6,23 +6,20 @@
   class="filter-header"
 >
   <h3 class="filter-title">
-    {{ filterTitle() }}
+    {{ filterData().title }}
   </h3>
   <lucide-icon class="chevron-icon" [img]="chevronIcon()" />
 </div>
 @if (isExpanded()) {
   <div class="filter-values">
-    @for (value of values(); track $index) {
+    @for (option of filterData().options; track $index) {
       <button
-        (click)="toggleValue(value.title)"
-        [class]="
-          selectedValues().has(value.title)
-            ? 'genreItem genreItemSelected'
-            : 'genreItem'
-        "
+        class="genreItem"
+        (click)="toggleValue(option.value)"
+        [class.genreItemSelected]="selectedValues().has(option.value)"
         matRipple
       >
-        {{ value.title }}
+        {{ option.title }}
       </button>
     }
   </div>

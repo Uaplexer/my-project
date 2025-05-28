@@ -1,15 +1,15 @@
-<label class="select-label" [for]="filterTitleId">
-  {{ filterTitle() }}
+<label class="select-label" [for]="filterData().title">
+  {{ filterData().title }}
 </label>
 <div class="select-field">
   <select
-    [id]="filterTitleId"
+    [id]="filterData().title"
     [(ngModel)]="selectedValue"
     (ngModelChange)="onSelectionChange($event)"
   >
     <option value="" selected>{{ placeholder() }}</option>
-    @for (option of options(); track $index) {
-      <option [value]="option.title">
+    @for (option of filterData().options; track $index) {
+      <option [value]="option.value">
         {{ option.title }}
       </option>
     }

@@ -1,5 +1,9 @@
 <div class="anime-search-filters">
-  <app-filter-block (filtersApplied)="onFiltersChanged($event)" />
+  <app-filter-block
+    [singleSelects]="filterSingleSelects()"
+    [multipleSelects]="filterMultipleSelects()"
+    (filtersApplied)="onFiltersChanged($event)"
+  />
 </div>
 
 @if (showPagination()) {

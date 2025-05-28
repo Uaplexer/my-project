@@ -28,6 +28,15 @@ export interface AnimeFeed {
   newest: Anime[];
 }
 
+interface AnimeFilterSelectBase {
+  title: string;
+  options: { value: string; title: string }[];
+}
+
+export interface AnimeFilterSingleSelect extends AnimeFilterSelectBase {}
+
+export interface AnimeFilterMultipleSelect extends AnimeFilterSelectBase {}
+
 export interface AnimeFilterDTO {
   genres?: string[];
   themes?: string[];

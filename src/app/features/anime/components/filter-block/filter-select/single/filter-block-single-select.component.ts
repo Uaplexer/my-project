@@ -1,6 +1,6 @@
 import { Component, input, signal, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TitledEntity } from '@shared/models/common.model';
+import { AnimeFilterSingleSelect } from '@features/anime/models/anime.model';
 
 @Component({
   selector: 'filter-block-single-select',
@@ -9,19 +9,14 @@ import { TitledEntity } from '@shared/models/common.model';
   styleUrl: './filter-block-single-select.component.scss',
 })
 export class FilterBlockSingleSelectComponent {
-  filterTitle = input.required<string>();
-  options = input.required<TitledEntity[]>();
+  filterData = input.required<AnimeFilterSingleSelect>();
   placeholder = input<string>('All');
 
   selectionChange = output<{ name: string; value: string }>();
 
   selectedValue = signal('');
 
-  get filterTitleId(): string {
-    return this.filterTitle().toLowerCase().replace(/\s+/g, '-') + '-select';
-  }
-
   onSelectionChange(value: string) {
-    this.selectionChange.emit({ name: this.filterTitle(), value: value });
+    this.selectionChange.emit({ name: this.filterData().title, value: value });
   }
 }

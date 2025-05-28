@@ -1,9 +1,10 @@
-import { Component, inject, OnInit, output } from '@angular/core';
-import { AnimeReferenceService } from '@core/services/api/anime/anime-reference.service';
-import { firstValueFrom, forkJoin } from 'rxjs';
+import { Component, input, output, signal } from '@angular/core';
 import { FilterBlockSingleSelectComponent } from './filter-select/single/filter-block-single-select.component';
 import { FilterBlockMultipleSelectComponent } from './filter-select/multiple/filter-block-multiple-select.component';
-import { TitledEntity } from '@shared/models/common.model';
+import {
+  AnimeFilterMultipleSelect,
+  AnimeFilterSingleSelect,
+} from '@features/anime/models/anime.model';
 
 interface FilterChangeEvent {
   name: string;
@@ -19,69 +20,49 @@ interface FilterChangeEvent {
   templateUrl: './filter-block.component.html',
   styleUrl: './filter-block.component.scss',
 })
-export class FilterBlockComponent implements OnInit {
-  readonly animeReferenceService = inject(AnimeReferenceService);
-  readonly filtersApplied = output<Record<string, string | string[]>>();
+export class FilterBlockComponent {
+  singleSelects = input<AnimeFilterSingleSelect[]>();
+  multipleSelects = input<AnimeFilterMultipleSelect[]>();
 
-  filters: Record<string, string | string[]> = {};
+  filtersApplied = output<Record<string, string | string[]>>();
 
-  availableTypes: TitledEntity[] = [];
-  availableStatuses: TitledEntity[] = [];
-  availableAgeRatings: TitledEntity[] = [];
-
-  availableGenres: TitledEntity[] = [];
-  availableThemes: TitledEntity[] = [];
-
-  availableSortOptions = [{ title: 'Id' }, { title: 'Score' }];
-  availableSortOrders = [{ title: 'ASC' }, { title: 'DESC' }];
-
-  async ngOnInit(): Promise<void> {
-    const result = await firstValueFrom(
-      forkJoin([
-        this.animeReferenceService.getAllTypes(),
-        this.animeReferenceService.getAllStatuses(),
-        this.animeReferenceService.getAllAgeRatings(),
-        this.animeReferenceService.getAllGenres(),
-        this.animeReferenceService.getAllThemes(),
-      ]),
-    );
-
-    if (result) {
-      const [types, statuses, ageRatings, genres, themes] = result;
-      this.availableTypes = types;
-      this.availableStatuses = statuses;
-      this.availableAgeRatings = ageRatings;
-      this.availableGenres = genres;
-      this.availableThemes = themes;
-    }
-  }
+  filters = signal<Record<string, string | string[]>>({});
 
   emitFilters() {
-    this.filtersApplied.emit({ ...this.filters });
+    this.filtersApplied.emit(this.filters());
   }
 
   onSingleSelectChange({ name, value }: FilterChangeEvent) {
-    if (value === '') {
-      delete this.filters[name];
-    } else {
-      this.filters[name] = value;
-    }
+    this.filters.update((current) => {
+      const updated = { ...current };
+      if (value === '') {
+        delete updated[name];
+      } else {
+        updated[name] = value;
+      }
+      return updated;
+    });
     this.emitFilters();
   }
 
   onMultipleSelectChange({ name, value }: FilterChangeEvent) {
-    const current = this.filters[name];
-    const arr = Array.isArray(current)
-      ? [...current]
-      : current
-        ? [current]
-        : [];
+    this.filters.update((current) => {
+      const updated = { ...current };
+      const existing = updated[name];
+      const values = Array.isArray(existing)
+        ? [...existing]
+        : existing
+          ? [existing]
+          : [];
 
-    if (arr.includes(value)) {
-      this.filters[name] = arr.filter((v) => v !== value);
-    } else {
-      this.filters[name] = [...arr, value];
-    }
+      if (values.includes(value)) {
+        updated[name] = values.filter((v) => v !== value);
+      } else {
+        updated[name] = [...values, value];
+      }
+
+      return updated;
+    });
     this.emitFilters();
   }
 }
