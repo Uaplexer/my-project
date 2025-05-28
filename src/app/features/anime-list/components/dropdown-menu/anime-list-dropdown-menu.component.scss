@@ -30,9 +30,9 @@
   }
 
   &-icon {
-    color: var(--primary-first);
     width: 20px;
     height: 20px;
+    color: var(--primary-first);
     transition: transform 0.2s ease;
 
     .anime-list-dropdown-toggle:hover & {
@@ -41,11 +41,11 @@
   }
 
   &-menu {
-    position: absolute;
-    right: 0;
-    top: calc(100% + 8px);
-    z-index: 20;
     width: 180px;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 20;
     background: var(--background-first);
     border-radius: $rounded-xl;
     box-shadow:
@@ -69,20 +69,20 @@
 
   &-menu-inner {
     @include flex-col;
-    padding: 6px;
-    background: var(--background-first);
     position: relative;
+    background: var(--background-first);
+    padding: 6px;
     z-index: 1;
   }
 
   &-option {
     padding: 10px 16px;
-    text-align: left;
-    font-size: $font-size-400;
     color: var(--text-first);
-    border-radius: $rounded-lg;
-    transition: all 0.15s ease;
+    font-size: $font-size-400;
     font-weight: $font-weight-500;
+    border-radius: $rounded-lg;
+    text-align: left;
+    transition: all 0.15s ease;
 
     &:hover {
       background-color: var(--background-first);

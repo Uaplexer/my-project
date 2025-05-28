@@ -65,6 +65,7 @@
   }
 
   &-poster {
+    position: relative;
     width: 180px;
     margin-bottom: 1.5rem;
     border-radius: $rounded-2xl;
@@ -77,9 +78,15 @@
     }
 
     img {
-      width: 100%;
-      height: auto;
       display: block;
+      height: auto;
+      width: 100%;
+    }
+
+    .add-to-list-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
     }
   }
 
@@ -131,11 +138,6 @@
     gap: 0.5rem;
   }
 
-  &-actions {
-    @include flex-wrap;
-    gap: 1rem;
-  }
-
   &-action-btn {
     display: flex;
     align-items: center;
@@ -143,20 +145,12 @@
     padding: 0.75rem 1.25rem;
     border-radius: $rounded-lg;
     font-weight: $font-weight-600;
-    background-color: var(--background-first-transparent-01);
+    background-color: var(--primary-first);
     backdrop-filter: blur(4px);
     transition: all 0.2s ease;
 
     &:hover {
-      background-color: var(--background-first-transparent-02);
-    }
-
-    &--primary {
-      background-color: var(--primary-first);
-
-      &:hover {
-        background-color: var(--primary-second);
-      }
+      background-color: var(--primary-second);
     }
   }
 }
