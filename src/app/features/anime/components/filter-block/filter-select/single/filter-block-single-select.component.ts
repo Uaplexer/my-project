@@ -1,6 +1,9 @@
 import { Component, input, signal, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AnimeFilterSingleSelect } from '@features/anime/models/anime.model';
+import {
+  AnimeFilterSingleSelect,
+  FilterChangeEvent,
+} from '@features/anime/models/anime.model';
 
 @Component({
   selector: 'filter-block-single-select',
@@ -12,7 +15,7 @@ export class FilterBlockSingleSelectComponent {
   filterData = input.required<AnimeFilterSingleSelect>();
   placeholder = input<string>('All');
 
-  selectionChange = output<{ name: string; value: string }>();
+  selectionChange = output<FilterChangeEvent>();
 
   selectedValue = signal('');
 

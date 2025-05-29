@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { AnimeService } from '@core/services/api/anime/anime.service';
-import { Anime } from '@features/anime/models/anime.model';
+import { Anime, AnimeFilterStruct } from '@features/anime/models/anime.model';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { PaginationResponse } from '@shared/models/pagination.model';
@@ -8,7 +8,7 @@ import { GenericState } from '@shared/models/state.model';
 import { debounceTime, delay, pipe, switchMap, tap } from 'rxjs';
 
 interface AnimeListState extends GenericState<PaginationResponse<Anime>> {
-  filters: any | null;
+  filters: AnimeFilterStruct | null;
 }
 
 const initialState: AnimeListState = {

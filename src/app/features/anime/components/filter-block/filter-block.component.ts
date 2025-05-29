@@ -4,12 +4,9 @@ import { FilterBlockMultipleSelectComponent } from './filter-select/multiple/fil
 import {
   AnimeFilterMultipleSelect,
   AnimeFilterSingleSelect,
+  AnimeFilterStruct,
+  FilterChangeEvent,
 } from '@features/anime/models/anime.model';
-
-interface FilterChangeEvent {
-  name: string;
-  value: string;
-}
 
 @Component({
   selector: 'app-filter-block',
@@ -24,9 +21,9 @@ export class FilterBlockComponent {
   singleSelects = input<AnimeFilterSingleSelect[]>();
   multipleSelects = input<AnimeFilterMultipleSelect[]>();
 
-  filtersApplied = output<Record<string, string | string[]>>();
+  filtersApplied = output<AnimeFilterStruct>();
 
-  filters = signal<Record<string, string | string[]>>({});
+  filters = signal<AnimeFilterStruct>({});
 
   emitFilters() {
     this.filtersApplied.emit(this.filters());

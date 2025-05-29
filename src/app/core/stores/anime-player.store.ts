@@ -97,7 +97,7 @@ export const AnimePlayerStore = signalStore(
   })),
   withMethods((store, animeEpisodeService = inject(AnimeEpisodeService)) => {
     let hls: Hls | null = null;
-    let timeUpdateInterval: any;
+    let timeUpdateInterval: ReturnType<typeof setInterval> | undefined;
 
     const startTimeUpdate = (videoElement: HTMLVideoElement) => {
       timeUpdateInterval = setInterval(() => {

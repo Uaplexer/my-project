@@ -5,7 +5,10 @@ import {
   LucideAngularModule,
 } from 'lucide-angular';
 import { MatRippleModule } from '@angular/material/core';
-import { AnimeFilterMultipleSelect } from '@features/anime/models/anime.model';
+import {
+  AnimeFilterMultipleSelect,
+  FilterChangeEvent,
+} from '@features/anime/models/anime.model';
 
 @Component({
   selector: 'filter-block-multiple-select',
@@ -15,7 +18,7 @@ import { AnimeFilterMultipleSelect } from '@features/anime/models/anime.model';
 })
 export class FilterBlockMultipleSelectComponent {
   filterData = input.required<AnimeFilterMultipleSelect>();
-  selectionChange = output<{ name: string; value: string }>();
+  selectionChange = output<FilterChangeEvent>();
 
   isCollapsed = signal(true);
   selectedValues = signal<Set<string>>(new Set());

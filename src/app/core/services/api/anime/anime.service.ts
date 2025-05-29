@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { effect, inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { firstValueFrom, Observable } from 'rxjs';
 import {
   BasePagination,
@@ -9,7 +9,7 @@ import {
   BaseAnime,
   Anime,
   AnimeFeed,
-  AnimeFilterDTO,
+  AnimeFilterStruct,
 } from '@features/anime/models/anime.model';
 import { environment } from 'src/environment/environment.prod';
 
@@ -54,7 +54,7 @@ export class AnimeService {
     return firstValueFrom(this.liteSearch$(query));
   }
 
-  filter$(params: any): Observable<PaginationResponse<Anime>> {
+  filter$(params: AnimeFilterStruct): Observable<PaginationResponse<Anime>> {
     return this.http.get<PaginationResponse<Anime>>(`${this.apiUrl}/filter`, {
       params: { ...params },
     });

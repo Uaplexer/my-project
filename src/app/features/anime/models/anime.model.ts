@@ -1,3 +1,5 @@
+import { Episode } from '@features/anime-episodes/models/episode.model';
+
 interface Poster {
   small: string;
   medium: string;
@@ -28,6 +30,11 @@ export interface AnimeFeed {
   newest: Anime[];
 }
 
+export interface FilterChangeEvent {
+  name: string;
+  value: string;
+}
+
 interface AnimeFilterSelectBase {
   title: string;
   options: { value: string; title: string }[];
@@ -36,6 +43,8 @@ interface AnimeFilterSelectBase {
 export interface AnimeFilterSingleSelect extends AnimeFilterSelectBase {}
 
 export interface AnimeFilterMultipleSelect extends AnimeFilterSelectBase {}
+
+export type AnimeFilterStruct = Record<string, string | string[]>;
 
 export interface AnimeFilterDTO {
   genres?: string[];
@@ -46,4 +55,24 @@ export interface AnimeFilterDTO {
   sources?: string[];
   minScore?: number;
   maxScore?: number;
+}
+
+export interface AnimeExternalApiResponse {
+  list: {
+    id: number;
+    in_favorites: number;
+    last_change: number;
+    announce: string | null;
+    code: string;
+    description: string;
+    names: { ru: string | null; en: string | null; alternative: string | null };
+    genres: string[];
+    player: { list: Episode[] };
+  }[];
+  pagination: {
+    current_page: number;
+    items_per_page: number;
+    pages: number;
+    total_number: number;
+  };
 }

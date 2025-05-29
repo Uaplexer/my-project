@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Episode } from '@features/anime-episodes/models/episode.model';
+import { AnimeExternalApiResponse } from '@features/anime/models/anime.model';
 import { map } from 'rxjs';
 
 @Injectable({
@@ -13,11 +14,11 @@ export class AnimeEpisodeService {
 
   getByTitle$(title: string) {
     return this.http
-      .get<any>(
+      .get<AnimeExternalApiResponse>(
         `${this.baseApiUrl}/title/search?limit=1&order_by=in_favorites&sort_direction=1&search=${title}`,
       )
       .pipe(
-        map((response: any) => {
+        map((response: AnimeExternalApiResponse) => {
           const episodes: Episode[] = [];
           const episodeMap = response.list?.[0]?.player?.list || {};
 
@@ -25,8 +26,15 @@ export class AnimeEpisodeService {
             uuid: string;
             name: string;
             episode: number;
-            skips: any;
-            hls: any;
+            skips: {
+              opening: number[] | null;
+              ending: number[] | null;
+            };
+            hls: {
+              fhd: string | null;
+              hd: string | null;
+              sd: string | null;
+            };
           }[]) {
             episodes.push({
               uuid: episode.uuid,
