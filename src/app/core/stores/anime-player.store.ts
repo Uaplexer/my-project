@@ -6,7 +6,7 @@ import {
   patchState,
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { pipe, switchMap, tap } from 'rxjs';
+import { finalize, pipe, switchMap, tap } from 'rxjs';
 import { inject, computed } from '@angular/core';
 import Hls from 'hls.js';
 import { Episode } from '@features/anime-episodes/models/episode.model';
@@ -158,8 +158,8 @@ export const AnimePlayerStore = signalStore(
                   patchState(store, {
                     error: error.message,
                   }),
-                complete: () => patchState(store, { isLoading: false }),
               }),
+              finalize(() => patchState(store, { isLoading: false })),
             ),
           ),
         ),

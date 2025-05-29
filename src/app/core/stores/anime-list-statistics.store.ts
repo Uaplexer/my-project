@@ -4,7 +4,7 @@ import { AnimeListStatistics } from '@features/anime-list/models/anime-list.mode
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { GenericState } from '@shared/models/state.model';
-import { delay, pipe, switchMap, tap } from 'rxjs';
+import { delay, finalize, pipe, switchMap, tap } from 'rxjs';
 
 interface AnimeListStatisticsState extends GenericState<AnimeListStatistics> {}
 
@@ -29,8 +29,8 @@ export const AnimeListStatisticsStore = signalStore(
                   data: statistics,
                 }),
               error: (error) => patchState(store, { error: error.message }),
-              complete: () => patchState(store, { isLoading: false }),
             }),
+            finalize(() => patchState(store, { isLoading: false })),
           ),
         ),
       ),

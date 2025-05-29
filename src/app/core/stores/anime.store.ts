@@ -5,7 +5,7 @@ import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { PaginationResponse } from '@shared/models/pagination.model';
 import { GenericState } from '@shared/models/state.model';
-import { debounceTime, delay, pipe, switchMap, tap } from 'rxjs';
+import { debounceTime, delay, finalize, pipe, switchMap, tap } from 'rxjs';
 
 interface AnimeListState extends GenericState<PaginationResponse<Anime>> {
   filters: AnimeFilterStruct | null;
@@ -33,13 +33,12 @@ export const AnimeListStore = signalStore(
             tap({
               next: (response) =>
                 patchState(store, {
-                  isLoading: false,
                   data: response,
                   filters: params,
                 }),
-              error: (error) =>
-                patchState(store, { isLoading: false, error: error.message }),
+              error: (error) => patchState(store, { error: error.message }),
             }),
+            finalize(() => patchState(store, { isLoading: false })),
           ),
         ),
       ),

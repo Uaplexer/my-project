@@ -3,6 +3,7 @@ import { AnimeCommentService } from '@core/services/api/anime/anime-comment.serv
 import { SessionService } from '@core/services/api/auth/session.service';
 import { BaseComment } from '@features/anime-comment/models/anime-comment.model';
 import { User } from '@features/user/models/user.model';
+import { finalize } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -22,13 +23,13 @@ export class AnimeCommentStore {
     this.isLoading.set(true);
     this.animeCommentService
       .getByAnimeId$(animeId, { page: 1, pageSize: 24 })
+      .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe({
         next: (response) => {
           this.comments.set(response.items);
           this.currentAnimeId.set(animeId);
         },
         error: (error) => this.error.set(error.message),
-        complete: () => this.isLoading.set(false),
       });
   }
 

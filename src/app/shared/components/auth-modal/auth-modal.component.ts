@@ -8,7 +8,7 @@ import {
 import { AuthFlowService } from '@core/services/api/auth/auth-flow.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { equalValues } from '@shared/forms/validators/equal-values.model';
-import { Subject, takeUntil } from 'rxjs';
+import { finalize, Subject, takeUntil } from 'rxjs';
 
 const MIN_PASSWORD_LENGTH = 6;
 
@@ -80,11 +80,13 @@ export class AuthModalComponent implements OnDestroy {
 
     this.authFlowService
       .handleLogin(this.loginCredentials)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$),
+        finalize(() => this.isLoading.set(false)),
+      )
       .subscribe({
         next: () => this.authFlowService.closeAuthModal(),
         error: () => this.isLoginFailed.set(true),
-        complete: () => this.isLoading.set(false),
       });
   }
 
@@ -97,11 +99,13 @@ export class AuthModalComponent implements OnDestroy {
 
     this.authFlowService
       .handleRegister(this.registerData)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$),
+        finalize(() => this.isLoading.set(false)),
+      )
       .subscribe({
         next: () => this.authFlowService.closeAuthModal(),
         error: () => this.isRegisterFailed.set(true),
-        complete: () => this.isLoading.set(false),
       });
   }
   onClose(): void {

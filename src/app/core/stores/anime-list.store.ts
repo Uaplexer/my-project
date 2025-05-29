@@ -11,7 +11,7 @@ import {
   PaginationResponse,
 } from '@shared/models/pagination.model';
 import { GenericState } from '@shared/models/state.model';
-import { debounceTime, delay, pipe, switchMap, tap } from 'rxjs';
+import { debounceTime, delay, finalize, pipe, switchMap, tap } from 'rxjs';
 
 interface AnimeListListState
   extends GenericState<PaginationResponse<AnimeList>> {
@@ -60,8 +60,8 @@ export const AnimeListListStore = signalStore(
                   patchState(store, {
                     error: error.message,
                   }),
-                complete: () => patchState(store, { isLoading: false }),
               }),
+              finalize(() => patchState(store, { isLoading: false })),
             ),
         ),
       ),
