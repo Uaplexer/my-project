@@ -1,5 +1,9 @@
 import { Injectable, signal } from '@angular/core';
 import { Theme, ThemeNames } from '@shared/models/theme.model';
+import {
+  LOCAL_STORAGE_THEME_KEY,
+  HTML_DATA_THEME_ATTRIBUTE,
+} from '@shared/constants/theme.constants';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
@@ -12,10 +16,13 @@ export class ThemeService {
   readonly currentTheme = signal<Theme | null>(null);
 
   constructor() {
-    const saved = localStorage.getItem('theme');
-    if (saved && this.themes.map((t) => t.name).includes(saved as ThemeNames)) {
+    const savedTheme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY);
+    if (
+      savedTheme &&
+      this.themes.map((t) => t.name).includes(savedTheme as ThemeNames)
+    ) {
       this.setTheme(
-        this.themes.find((t) => t.name === (saved as ThemeNames)) as Theme,
+        this.themes.find((t) => t.name === (savedTheme as ThemeNames)) as Theme,
       );
     } else {
       this.setTheme(this.themes[0]);
@@ -23,8 +30,8 @@ export class ThemeService {
   }
 
   setTheme(theme: Theme): void {
-    document.body.setAttribute('data-theme', theme.name);
-    localStorage.setItem('theme', theme.name);
+    document.body.setAttribute(HTML_DATA_THEME_ATTRIBUTE, theme.name);
+    localStorage.setItem(LOCAL_STORAGE_THEME_KEY, theme.name);
     this.currentTheme.set(theme);
   }
 
