@@ -13,15 +13,7 @@
         [class.anime-list-tab--active]="animeListType() === tab"
         (click)="onTypeChange(tab)"
       >
-        {{
-          tab === "Watching"
-            ? "Watching"
-            : tab === "Viewed"
-              ? "Completed"
-              : tab === "Postponed"
-                ? "On Hold"
-                : "Dropped"
-        }}
+        {{ tab }}
       </button>
     }
   </div>

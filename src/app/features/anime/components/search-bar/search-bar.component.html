@@ -1,6 +1,5 @@
 <button class="search-button">
-  <lucide-icon name="search" [img]="SearchIcon" size="20" class="search-icon">
-  </lucide-icon>
+  <lucide-icon name="search" [img]="SearchIcon" size="20" class="search-icon" />
 </button>
 <app-dynamic-input
   class="search-input"
@@ -8,7 +7,7 @@
   (inputValueChanged)="store.setSearchQuery($event)"
 />
 <button [routerLink]="['/anime/filter']" class="filter-button">
-  <lucide-icon name="funnel" [img]="FunnelIcon"></lucide-icon>
+  <lucide-icon name="funnel" [img]="FunnelIcon" />
 </button>
 <div class="results-dropdown">
   @if (store.isLoading()) {

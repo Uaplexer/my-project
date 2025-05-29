@@ -1,7 +1,8 @@
-<app-profile-square [user]="comment().user"/>
+@let animeComment = comment();
+<app-profile-square [user]="animeComment.user" />
 <div class="container">
-  <h4 class="author-username">{{ comment().user.username }}</h4>
+  <h4 class="author-username">{{ animeComment.user.username }}</h4>
   <div class="comment-container">
-    <p class="comment-content">{{ comment().content }}</p>
+    <p class="comment-content">{{ animeComment.content }}</p>
   </div>
 </div>

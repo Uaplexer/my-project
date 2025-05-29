@@ -6,11 +6,13 @@
   />
 </div>
 
+@let animeListStoreData = animeListStore.data();
+
 @if (showPagination()) {
   <div class="anime-search-pagination">
     <app-pagination
-      [currentPage]="animeListStore.data()?.page || 1"
-      [lastPage]="animeListStore.data()?.totalPages || 1"
+      [currentPage]="animeListStoreData?.page || 1"
+      [lastPage]="animeListStoreData?.totalPages || 1"
       (paginationApplied)="onPageChange($event)"
     />
   </div>
@@ -18,7 +20,7 @@
 
 <div class="anime-search-results">
   <anime-grid
-    [animeListResponse]="animeListStore.data()"
+    [animeListResponse]="animeListStoreData"
     [isLoading]="animeListStore.isLoading()"
   />
 </div>
@@ -26,8 +28,8 @@
 @if (showPagination()) {
   <div class="anime-search-pagination">
     <app-pagination
-      [currentPage]="animeListStore.data()?.page || 1"
-      [lastPage]="animeListStore.data()?.totalPages || 1"
+      [currentPage]="animeListStoreData?.page || 1"
+      [lastPage]="animeListStoreData?.totalPages || 1"
       (paginationApplied)="onPageChange($event)"
     />
   </div>

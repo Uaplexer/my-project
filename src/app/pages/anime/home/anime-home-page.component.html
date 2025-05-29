@@ -1,7 +1,8 @@
+@let animeFeedStoreData = animeFeedStore.data();
 <section class="home-page-section">
   <anime-carousel
     title="spring anime season"
-    [animeList]="animeFeedStore.data()?.popularOngoings"
+    [animeList]="animeFeedStoreData?.popularOngoings"
     [isLoading]="animeFeedStore.isLoading()"
   />
 </section>
@@ -9,16 +10,16 @@
 <section class="home-page-section home-page-section-scrollables">
   <anime-scrollable-block
     title="newest anime"
-    [animeList]="animeFeedStore.data()?.newest"
+    [animeList]="animeFeedStoreData?.newest"
   />
 
   <anime-scrollable-block
     title="most popular anime"
-    [animeList]="animeFeedStore.data()?.mostPopular"
+    [animeList]="animeFeedStoreData?.mostPopular"
   />
 
   <anime-scrollable-block
     title="popular ongoings"
-    [animeList]="animeFeedStore.data()?.popularOngoings"
+    [animeList]="animeFeedStoreData?.popularOngoings"
   />
 </section>

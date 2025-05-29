@@ -1,22 +1,23 @@
+@let animeItem = anime();
 <div class="carousel-item-image-container">
   <img
-    [src]="anime().posters.medium"
+    [src]="animeItem.posters.medium"
     fallback="assets/images/no-poster.png"
-    [alt]="anime().title"
+    [alt]="animeItem.title"
     class="carousel-item-image"
-    [routerLink]="['/anime', anime().id]"
+    [routerLink]="['/anime', animeItem.id]"
   />
-  @if (anime().score) {
+  @if (animeItem.score) {
     <div class="carousel-item-rating">
       <lucide-icon
         [img]="StarIcon"
         [size]="15"
         class="fill-white carousel-item-star-icon"
       />
-      <span>{{ anime().score }}</span>
+      <span>{{ animeItem.score }}</span>
     </div>
   }
 </div>
 <div class="carousel-item-info">
-  <h3 class="carousel-item-title">{{ anime().title }}</h3>
+  <h3 class="carousel-item-title">{{ animeItem.title }}</h3>
 </div>

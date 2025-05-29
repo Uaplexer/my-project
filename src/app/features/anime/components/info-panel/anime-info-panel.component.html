@@ -1,13 +1,14 @@
+@let animeItem = anime();
 <div class="anime-poster">
   <img
-    [src]="anime().posters.medium"
-    [alt]="anime().title"
+    [src]="animeItem.posters.medium"
+    [alt]="animeItem.title"
     fallback="assets/images/no-poster.png"
   />
 </div>
 
 <div class="anime-header">
-  <h2 class="anime-title">{{ anime().title }}</h2>
+  <h2 class="anime-title">{{ animeItem.title }}</h2>
 
   <div class="rating-star">
     <svg
@@ -21,24 +22,24 @@
         d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
       />
     </svg>
-    {{ anime().score }}
+    {{ animeItem.score }}
   </div>
 </div>
 
 <div class="anime-badges">
-  <span class="badge badge-age">{{ anime().minAge }}</span>
+  <span class="badge badge-age">{{ animeItem.minAge }}</span>
   <span class="badge badge-hd">HD</span>
   <span class="badge badge-cc">CC</span>
   <span class="badge badge-duration">24m</span>
 </div>
 
 <div class="anime-description">
-  <p>{{ anime().description }}</p>
+  <p>{{ animeItem.description }}</p>
 </div>
 
 <div class="anime-source-info">
   <p>
-    AniUniverse is the best site to watch {{ anime().title }} SUB online, or you
-    can even watch {{ anime().title }} DUB in HD quality.
+    AniUniverse is the best site to watch {{ animeItem.title }} SUB online, or
+    you can even watch {{ animeItem.title }} DUB in HD quality.
   </p>
 </div>

@@ -1,38 +1,40 @@
+@let userInfo = user();
 <div class="profile-sidebar-header">
   <user-profile-sidebar-avatar
     [isCurrentUserProfileOwner]="isCurrentUserProfileOwner"
-    [user]="user()"
+    [user]="userInfo"
   />
-  <h2 class="profile-sidebar-username">{{ user().username }}</h2>
+  <h2 class="profile-sidebar-username">{{ userInfo.username }}</h2>
   <p class="profile-sidebar-badge">Badge</p>
   <p class="profile-sidebar-join-date">
     <lucide-icon [img]="CalendarIcon" class="size-5 profile-sidebar-icon" />
-    Joined {{ user().createdAt | date: "MMM d, Y" }}
+    Joined {{ userInfo.createdAt | date: "MMM d, y" }}
   </p>
 </div>
 
+@let statistics = userAnimeListStatistics();
 <div class="anime-stats">
   <div class="anime-stats-item">
     <div class="anime-stats-count">
-      {{ userAnimeListStatistics()?.viewed }}
+      {{ statistics?.viewed }}
     </div>
     <div class="anime-stats-label">Completed</div>
   </div>
   <div class="anime-stats-item">
     <div class="anime-stats-count">
-      {{ userAnimeListStatistics()?.watching }}
+      {{ statistics?.watching }}
     </div>
     <div class="anime-stats-label">Watching</div>
   </div>
   <div class="anime-stats-item">
     <div class="anime-stats-count">
-      {{ userAnimeListStatistics()?.postponed }}
+      {{ statistics?.postponed }}
     </div>
     <div class="anime-stats-label">Plan to Watch</div>
   </div>
   <div class="anime-stats-item">
     <div class="anime-stats-count">
-      {{ userAnimeListStatistics()?.abandoned }}
+      {{ statistics?.abandoned }}
     </div>
     <div class="anime-stats-label">Dropped</div>
   </div>
@@ -46,7 +48,7 @@
 <div class="user-bio">
   <h3 class="user-bio-title">Bio</h3>
   <p class="user-bio-content">
-    {{ user().about ? user().about : "Empty" }}
+    {{ userInfo.about || "Empty" }}
   </p>
 </div>
 

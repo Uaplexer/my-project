@@ -16,7 +16,7 @@ export class AnimeCommentStore {
   isLoading = signal(false);
   error = signal<string | null>(null);
 
-  loaded = computed(() => !!this.comments());
+  isLoaded = computed(() => !!this.comments());
 
   loadComments(animeId: number) {
     this.isLoading.set(true);

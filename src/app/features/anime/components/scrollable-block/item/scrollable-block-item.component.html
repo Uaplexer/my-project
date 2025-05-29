@@ -1,7 +1,8 @@
+@let animeItem = anime();
 <div class="anime-image-wrapper">
   <img
     class="anime-image"
-    [src]="anime().posters.small"
+    [src]="animeItem.posters.small"
     fallback="assets/images/no-poster.png"
   />
   <div class="anime-rating-container">
@@ -10,14 +11,14 @@
       [size]="11"
       class="fill-white anime-star-icon"
     />
-    <span class="anime-rating">{{ anime().score }}</span>
+    <span class="anime-rating">{{ animeItem.score }}</span>
   </div>
 </div>
 <div class="anime-info">
-  <h2 class="anime-title">{{ anime().title }}</h2>
+  <h2 class="anime-title">{{ animeItem.title }}</h2>
   <anime-genre-list
     size="small"
     class="anime-genres"
-    [genres]="anime().genres"
+    [genres]="animeItem.genres"
   />
 </div>

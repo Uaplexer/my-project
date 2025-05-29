@@ -6,7 +6,7 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { Anime } from '@features/anime/models/anime.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
@@ -26,7 +26,7 @@ import { TabsComponent } from '@shared/components/tabs/tabs.component';
 import { AnimeCommentStore } from '@core/stores/anime-comment.store';
 import { CommentBlockComponent } from '@features/anime-comment/components/block/block.component';
 import { AddCommentComponent } from '@features/anime-comment/components/add/add.component';
-import { AnimeGenreListComponent } from '../../../features/anime/components/genre-list/genre-list.component';
+import { AnimeGenreListComponent } from '@features/anime/components/genre-list/genre-list.component';
 
 @Component({
   selector: 'anime-single-page',
@@ -56,7 +56,7 @@ export class AnimeSinglePageComponent implements OnInit, OnDestroy {
 
   onTabChange(tab: string) {
     if (
-      (tab == 'Comments' && !this.store.loaded()) ||
+      (tab == 'Comments' && !this.store.isLoaded()) ||
       this.anime().id != this.store.currentAnimeId()
     ) {
       this.store.loadComments(this.anime().id);

@@ -1,8 +1,9 @@
+@let animeItem = anime();
 <div class="anime-hero">
   <div class="anime-hero-backdrop">
     <img
-      [alt]="anime().title"
-      [src]="anime().posters.medium"
+      [alt]="animeItem.title"
+      [src]="animeItem.posters.medium"
       fallback="assets/images/no-poster.png"
     />
   </div>
@@ -10,43 +11,43 @@
   <div class="anime-hero-content">
     <div class="anime-hero-poster">
       <img
-        [alt]="anime().title"
-        [src]="anime().posters.medium"
+        [alt]="animeItem.title"
+        [src]="animeItem.posters.medium"
         fallback="assets/images/no-poster.png"
       />
       <anime-list-dropdown-menu
         class="add-to-list-btn"
-        [animeId]="anime().id"
+        [animeId]="animeItem.id"
       />
     </div>
 
     <div class="anime-hero-info">
       <h1 class="anime-hero-title">
-        {{ anime().title || "Unknown Title" }}
+        {{ animeItem.title || "Unknown Title" }}
       </h1>
 
       <div class="anime-hero-meta">
         <div class="anime-hero-rating">
           <lucide-icon [img]="StarIcon"></lucide-icon>
-          <span>{{ anime().score || "?" }}</span>
+          <span>{{ animeItem.score || "?" }}</span>
         </div>
 
         <div class="anime-hero-separator"></div>
 
         <div class="anime-hero-date">
           <lucide-icon [img]="CalendarIcon"></lucide-icon>
-          <span>{{ anime().airedFrom | date }}</span>
+          <span>{{ animeItem.airedFrom | date }}</span>
         </div>
       </div>
 
       <anime-genre-list
         class="anime-hero-genres"
         size="large"
-        [genres]="anime().genres"
+        [genres]="animeItem.genres"
       />
 
       <button
-        [routerLink]="['/anime', anime().id, 'watch']"
+        [routerLink]="['/anime', animeItem.id, 'watch']"
         class="anime-hero-action-btn anime-hero-action-btn--primary"
       >
         <lucide-icon [img]="PlayIcon"></lucide-icon>
@@ -64,7 +65,7 @@
 
   @if (currentTab() === "Synopsis") {
     <div class="anime-description">
-      <p>{{ anime().description }}</p>
+      <p>{{ animeItem.description }}</p>
     </div>
   } @else if (currentTab() === "Comments") {
     <app-add-comment />

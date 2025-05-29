@@ -18,14 +18,15 @@
     }
   } @else {
     @for (episode of playerStore.filteredEpisodes(); track episode.uuid) {
+      @let isCurrentEpisode = episode == playerStore.currentEpisode();
       <li
         class="episode-item"
-        [class.active]="episode == playerStore.currentEpisode()"
+        [class.active]="isCurrentEpisode"
         (click)="playerStore.playEpisode(episode)"
       >
         <p class="episode-number">{{ episode.episode }}</p>
         <h4 class="episode-title">{{ episode.name }}</h4>
-        @if (episode == playerStore.currentEpisode()) {
+        @if (isCurrentEpisode) {
           <div class="episode-playing"></div>
         }
       </li>

@@ -1,9 +1,10 @@
+@let response = animeListResponse();
 <div class="results-header">
   <h2 class="results-title">Results</h2>
-  @if (!isLoading() && animeListResponse()?.totalCount) {
+  @if (!isLoading() && response?.totalCount) {
     <span class="results-count">
-      {{ animeListResponse()?.totalCount }}
-      {{ animeListResponse()?.totalCount === 1 ? "result" : "results" }}
+      {{ response?.totalCount }}
+      {{ response?.totalCount === 1 ? "result" : "results" }}
     </span>
   }
 </div>
@@ -33,11 +34,11 @@
       </div>
     }
   </div>
-} @else if (animeListResponse()?.totalCount === 0) {
+} @else if (response?.totalCount === 0) {
   <h2 class="no-results">No results found</h2>
 } @else {
   <div class="anime-grid">
-    @for (anime of animeListResponse()?.items; track anime.id) {
+    @for (anime of response?.items; track anime.id) {
       <anime-grid-item [anime]="anime" />
     }
   </div>
